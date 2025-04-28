@@ -1,13 +1,28 @@
-import { SafeAreaView, StyleSheet, Text,TextInput, TouchableOpacity, View } from 'react-native';
-import Login from './screens/Login';
+import { StyleSheet, SafeAreaView, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Login from "./screens/Login";
+import Home from "./screens/Home";
+import Poste from "./components/Poste";
+
+const Stack = createNativeStackNavigator();
+
 export default function App() {
   const onButtonPress = () => {
     console.log('button pressed.')
   }
   return (
     <SafeAreaView style={styles.container}>
-      <Login/>
-
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="Home" component={Home} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </SafeAreaView>
   );
 }
@@ -15,10 +30,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#542965',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative',
+    justifyContent: "center",
   },
 
   header: {
